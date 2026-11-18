@@ -1,0 +1,3087 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PolyU Design Subsidy Portal — AY 2026/2027</title>
+  <meta name="description" content="PolyU School of Design Competition and Award Subsidy Portal for Academic Year 2026/2027." />
+  <meta property="og:title" content="PolyU Design Subsidy Portal" />
+  <meta property="og:description" content="PolyU School of Design Competition and Award Subsidy Portal for Academic Year 2026/2027." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --crimson: #9E0B22;
+      --crimson-dark: #7A0719;
+      --crimson-deep: #6D0819;
+      --crimson-soft: #FDF0F2;
+      --crimson-border: #F4C7CE;
+      --bg-canvas: #F8F7F8;
+      --surface: #FFFFFF;
+      --surface-muted: #F3F4F6;
+      --border: #E8EAEE;
+      --text-primary: #111827;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+      --green: #15803D;
+      --green-bg: #DCFCE7;
+      --amber: #B45309;
+      --amber-bg: #FEF3C7;
+      --amber-border: #F59E0B;
+      --shadow-xs: 0 1px 2px rgba(17, 24, 39, 0.04);
+      --shadow-sm: 0 2px 8px rgba(17, 24, 39, 0.05);
+      --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 24px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    button, input, select, textarea { font-family: inherit; }
+    button { cursor: pointer; border: none; background: none; padding: 0; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--crimson);
+      outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .tabular { font-variant-numeric: tabular-nums; }
+    .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+    /* Shell Layout */
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(90deg, #FBECEF 0%, #FDF4F5 60%, #FBECEF 100%);
+      border-bottom: 1px solid rgba(158, 11, 34, 0.1);
+      backdrop-filter: blur(12px);
+    }
+    .top-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      text-align: left;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      color: var(--crimson);
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-xs);
+      border: 1px solid rgba(158, 11, 34, 0.1);
+      flex-shrink: 0;
+    }
+    .brand-text { min-width: 0; }
+    .brand-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--crimson);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .icon-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      transition: background-color 150ms var(--ease);
+    }
+    .icon-btn:hover { background: rgba(158, 11, 34, 0.08); }
+    .notif-dot {
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--crimson);
+      border: 1.5px solid #FDF4F5;
+    }
+    .notif-dot.hidden { display: none; }
+    .avatar-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--crimson-deep);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform 150ms var(--ease), background-color 150ms var(--ease);
+    }
+    .avatar-btn:hover { background: var(--crimson); transform: translateY(-1px); }
+
+    /* Workspace Container */
+    .workspace {
+      flex: 1;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    /* Desktop Left Sidebar */
+    .desktop-sidebar {
+      display: none;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      min-width: 0;
+      padding: 16px 16px 96px;
+    }
+
+    /* Screens */
+    .screen {
+      display: none;
+      animation: fadeSlide 200ms var(--ease);
+    }
+    .screen.active {
+      display: block;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .screen { animation: none; }
+    }
+
+    /* Typography & Section Headers */
+    .section-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0 12px;
+    }
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .section-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .section-meta {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+    .section-link {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--crimson);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .section-link:hover { background: var(--crimson-soft); }
+
+    /* Cards & Surfaces */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xs);
+      padding: 16px;
+    }
+    .card-interactive {
+      transition: transform 150ms var(--ease), box-shadow 150ms var(--ease), border-color 150ms var(--ease);
+      text-align: left;
+      width: 100%;
+    }
+    .card-interactive:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+      border-color: #D5D9E0;
+    }
+    .stack-12 { display: flex; flex-direction: column; gap: 12px; }
+    .stack-16 { display: flex; flex-direction: column; gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+
+    /* Badges & Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .badge-crimson { background: var(--crimson-soft); color: var(--crimson); }
+    .badge-crimson-solid { background: var(--crimson); color: #FFFFFF; }
+    .badge-gray { background: var(--surface-muted); color: #4B5563; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-amber { background: var(--amber-bg); color: var(--amber); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .dot-crimson { background: var(--crimson); }
+    .dot-dark { background: #111827; }
+    .dot-gray { background: #6B7280; }
+    .dot-amber { background: #D97706; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background-color 150ms var(--ease), transform 120ms var(--ease), box-shadow 150ms var(--ease);
+    }
+    .btn:active { transform: scale(0.99); }
+    .btn-primary {
+      background: var(--crimson);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(158, 11, 34, 0.22);
+    }
+    .btn-primary:hover { background: var(--crimson-dark); }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xs);
+    }
+    .btn-secondary:hover { background: #F9FAFB; border-color: #D1D5DB; }
+    .btn-dark {
+      background: #18181B;
+      color: #FFFFFF;
+    }
+    .btn-dark:hover { background: #27272A; }
+    .btn-sm { min-height: 36px; padding: 6px 12px; font-size: 12px; border-radius: 10px; }
+    .btn-block { width: 100%; }
+
+    /* Icon Boxes */
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-box-pink { background: var(--crimson-soft); color: var(--crimson); }
+    .icon-box-gray { background: var(--surface-muted); color: #374151; }
+    .icon-box-green { background: var(--green-bg); color: var(--green); }
+    .icon-box-amber { background: var(--amber-bg); color: var(--amber); }
+
+    /* Hero Card (Screen 1) */
+    .hero-card {
+      background: radial-gradient(circle at 85% 15%, #FCECEF 0%, #FFFFFF 55%, #FFFFFF 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-title {
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin: 14px 0 8px;
+      text-wrap: balance;
+    }
+    .hero-title .accent { color: var(--crimson); }
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0 0 18px;
+      max-width: 44ch;
+    }
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .showcase-tile {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #1F2937;
+      text-align: left;
+    }
+    .showcase-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 250ms var(--ease);
+    }
+    .showcase-tile:hover img { transform: scale(1.04); }
+    .showcase-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.78) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+    }
+    .showcase-label {
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Stats Strip (Screen 1) */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 14px 8px;
+      margin-top: 16px;
+      box-shadow: var(--shadow-xs);
+    }
+    .stat-strip-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 6px;
+    }
+    .stat-strip-item + .stat-strip-item {
+      border-left: 1px solid var(--border);
+    }
+    .stat-strip-val { font-size: 14px; font-weight: 800; line-height: 1.2; }
+    .stat-strip-lbl { font-size: 10px; color: var(--text-secondary); }
+
+    /* Horizontal Competition Chips */
+    .chip-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .chip-scroll::-webkit-scrollbar { display: none; }
+    .comp-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: var(--shadow-xs);
+      transition: border-color 150ms var(--ease), background-color 150ms var(--ease);
+    }
+    .comp-chip:hover { border-color: var(--crimson-border); background: var(--crimson-soft); }
+
+    /* Quota Progress Bar */
+    .progress-track {
+      height: 8px;
+      background: var(--surface-muted);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--crimson);
+      border-radius: 999px;
+      transition: width 300ms var(--ease);
+    }
+
+    /* Filter Pills & Search */
+    .search-bar-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+    }
+    .search-input-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 40px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    .add-square-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--crimson);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(158, 11, 34, 0.24);
+    }
+    .add-square-btn:hover { background: var(--crimson-dark); }
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--text-secondary);
+      transition: all 150ms var(--ease);
+    }
+    .filter-pill .count-tag {
+      background: var(--surface-muted);
+      color: var(--text-primary);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+    .filter-pill.active {
+      background: #18181B;
+      color: #FFFFFF;
+      border-color: #18181B;
+    }
+    .filter-pill.active .count-tag {
+      background: rgba(255,255,255,0.2);
+      color: #FFFFFF;
+    }
+
+    /* Application Draft Accent Card */
+    .card-draft {
+      border-color: #FCD34D;
+      box-shadow: inset 3px 0 0 var(--amber-border), var(--shadow-xs);
+    }
+
+    /* Stepper */
+    .stepper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      position: relative;
+      padding: 8px 4px 4px;
+      margin-bottom: 18px;
+    }
+    .stepper-track {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      right: 28px;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .stepper-track-fill {
+      height: 100%;
+      background: var(--crimson);
+      transition: width 250ms var(--ease);
+    }
+    .step-node {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 52px;
+    }
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .step-node.done .step-circle {
+      background: var(--crimson);
+      border-color: var(--crimson);
+      color: #FFFFFF;
+    }
+    .step-node.active .step-circle {
+      background: var(--crimson-deep);
+      border-color: var(--crimson-deep);
+      color: #FFFFFF;
+      box-shadow: 0 0 0 5px var(--crimson-soft);
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .step-node.done .step-label,
+    .step-node.active .step-label {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    /* Form Controls */
+    .field-group { margin-bottom: 14px; }
+    .field-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .field-hint {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .field-hint.crimson { color: var(--crimson); }
+    .input-shell {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--surface-muted);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 0 12px;
+      min-height: 44px;
+      transition: border-color 150ms var(--ease), background-color 150ms var(--ease);
+    }
+    .input-shell.editable {
+      background: #F9FAFB;
+      border-color: var(--border);
+    }
+    .input-shell.editable:focus-within {
+      background: var(--surface);
+      border-color: var(--crimson);
+    }
+    .input-shell input,
+    .input-shell select,
+    .input-shell textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 10px 8px;
+      outline: none;
+    }
+    .input-shell input[readonly] { color: #374151; }
+
+    /* Target Directory Radio Grid */
+    .dir-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .dir-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 12px;
+      min-height: 46px;
+      border-radius: 12px;
+      background: var(--surface-muted);
+      border: 1.5px solid transparent;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: left;
+      transition: all 150ms var(--ease);
+    }
+    .dir-option.selected {
+      background: var(--crimson-soft);
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+    .radio-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #D1D5DB;
+      flex-shrink: 0;
+    }
+    .dir-option.selected .radio-dot { background: var(--crimson); }
+
+    /* Segmented Switch */
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+      background: var(--surface-muted);
+      padding: 4px;
+      border-radius: 14px;
+    }
+    .seg-btn {
+      min-height: 40px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 150ms var(--ease);
+    }
+    .seg-btn.active {
+      background: var(--surface);
+      color: var(--crimson);
+      box-shadow: var(--shadow-xs);
+    }
+
+    /* Dropzone */
+    .dropzone {
+      border: 1.5px dashed #D1D5DB;
+      border-radius: 16px;
+      background: #FAFAFB;
+      padding: 24px 16px;
+      text-align: center;
+      transition: border-color 150ms var(--ease), background-color 150ms var(--ease);
+    }
+    .dropzone.dragover {
+      border-color: var(--crimson);
+      background: var(--crimson-soft);
+    }
+
+    /* Accordion */
+    .accordion-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .accordion-trigger {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .accordion-panel {
+      display: none;
+      padding: 0 14px 14px 48px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      border-top: 1px solid #F3F4F6;
+      padding-top: 10px;
+    }
+    .accordion-item.open .accordion-panel { display: block; }
+    .accordion-item.open .chev-icon { transform: rotate(180deg); }
+    .chev-icon { transition: transform 180ms var(--ease); flex-shrink: 0; }
+
+    /* Bottom Navigation (Mobile & Tablet) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      height: 64px;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-height: 44px;
+      transition: color 150ms var(--ease);
+    }
+    .nav-tab.active {
+      color: var(--crimson);
+      font-weight: 700;
+    }
+
+    /* Modals & Bottom Sheet */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(17, 24, 39, 0.45);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-sheet {
+      width: 100%;
+      max-width: 540px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-radius: 24px 24px 0 0;
+      padding: 12px 20px 24px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.14);
+      animation: sheetUp 220ms var(--ease);
+    }
+    @keyframes sheetUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: #D1D5DB;
+      margin: 0 auto 14px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      z-index: 80;
+      background: #18181B;
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+      max-width: calc(100vw - 32px);
+      text-align: center;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Tablet Media Query (768px+) */
+    @media (min-width: 768px) {
+      .main-content { padding: 24px 24px 96px; }
+      .hero-cta-group { flex-direction: row; }
+      .hero-cta-group .btn { flex: 1; }
+      .desktop-2col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+      .modal-backdrop { align-items: center; padding: 24px; }
+      .modal-sheet { border-radius: 24px; }
+    }
+
+    /* Desktop Media Query (1024px+) */
+    @media (min-width: 1024px) {
+      .bottom-nav { display: none; }
+      .desktop-sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 248px;
+        flex-shrink: 0;
+        padding: 24px 16px;
+        gap: 6px;
+        border-right: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.72);
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-align: left;
+        transition: background-color 150ms var(--ease), color 150ms var(--ease);
+      }
+      .sidebar-item:hover { background: var(--surface-muted); color: var(--text-primary); }
+      .sidebar-item.active {
+        background: var(--crimson-soft);
+        color: var(--crimson);
+        font-weight: 700;
+      }
+      .sidebar-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 10px 4px;
+      }
+      .sidebar-profile-card {
+        margin-top: auto;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .main-content { padding: 28px 32px 48px; }
+      .hero-split-desktop {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 24px;
+        align-items: center;
+      }
+      .hero-split-desktop .showcase-grid { margin-bottom: 0; }
+      .toast { bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <!-- Persistent Top App Bar -->
+  <header class="top-header">
+    <div class="top-header-inner">
+      <button type="button" class="brand-lockup" data-nav="screen-home" aria-label="Go to PolyU Subsidy Portal Home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-text">
+          <span class="brand-title" style="display:block;">POLYU SUBSIDY PORTAL</span>
+          <span class="brand-subtitle" style="display:block;">PolyU School of Design (SD) • AY 2026/2027</span>
+        </span>
+      </button>
+      <div class="header-actions">
+        <button type="button" id="btn-notifications" class="icon-btn" aria-label="Open notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span id="notif-dot" class="notif-dot" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="avatar-btn" data-nav="screen-profile" aria-label="Open Student Profile and Results">CT</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <!-- Desktop Sidebar Navigation -->
+    <nav class="desktop-sidebar" aria-label="Primary Desktop Navigation">
+      <button type="button" class="sidebar-item active" data-nav="screen-home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </button>
+      <button type="button" class="sidebar-item" data-nav="screen-dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="sidebar-item" data-nav="screen-applications">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        <span>Applications</span>
+      </button>
+      <button type="button" class="sidebar-item" data-nav="screen-reimburse">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg>
+        <span>Reimburse</span>
+      </button>
+      <button type="button" class="sidebar-item" data-nav="screen-profile">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile &amp; Results</span>
+      </button>
+
+      <div class="sidebar-divider"></div>
+
+      <button type="button" class="sidebar-item" data-nav="screen-apply-1">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+        <span>New Application</span>
+      </button>
+      <button type="button" class="sidebar-item" data-nav="screen-help">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        <span>Help &amp; Guidelines</span>
+      </button>
+
+      <div class="sidebar-profile-card">
+        <img src="/src/assets/images/student_portrait_chan_1795001918521.jpg" alt="Chan Tai Man portrait" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;" />
+        <div style="min-width:0;">
+          <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Chan Tai Man</div>
+          <div style="font-size:11px;color:var(--text-secondary);" class="mono">21089452D</div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content" id="main-workspace">
+
+      <!-- =========================================================
+           SCREEN 1: HOME - GLOBAL DESIGN SUBSIDY (Initially Visible)
+           ========================================================= -->
+      <section id="screen-home" class="screen active" aria-labelledby="home-hero-heading">
+        <div class="hero-card">
+          <div class="hero-split-desktop">
+            <div>
+              <span class="badge badge-crimson">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                GLOBAL SUBSIDY 2026
+                <span class="dot dot-crimson" aria-hidden="true"></span>
+              </span>
+
+              <h1 id="home-hero-heading" class="hero-title">
+                Global Design<br /><span class="accent">Subsidy.</span>
+              </h1>
+              <p class="hero-subtitle">Empowering student designers on the world stage.</p>
+
+              <div class="hero-cta-group" style="margin-bottom:14px;">
+                <button type="button" class="btn btn-primary" data-nav="screen-apply-1">
+                  <span>Get Started</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+                <button type="button" class="btn btn-secondary" data-nav="screen-help">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  <span>Explore Funds</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="showcase-grid">
+              <button type="button" class="showcase-tile" data-comp-preview="Milan Exhibit" aria-label="View Milan Exhibit showcase details">
+                <img src="/src/assets/images/milan_exhibit_1795001916045.jpg" alt="Architectural white geometric model with red laser light beam at Milan Exhibit" />
+                <div class="showcase-scrim"><span class="showcase-label">MILAN EXHIBIT</span></div>
+              </button>
+              <button type="button" class="showcase-tile" data-comp-preview="Red Dot 2026" aria-label="View Red Dot 2026 prototype details">
+                <img src="/src/assets/images/red_dot_prototype_1795001917051.jpg" alt="Matte black modular camera sensor prototype on obsidian pedestal for Red Dot 2026" />
+                <div class="showcase-scrim"><span class="showcase-label">RED DOT 2026</span></div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portal Metrics Strip -->
+        <div class="stats-strip" role="region" aria-label="Program highlights">
+          <div class="stat-strip-item">
+            <span class="icon-box icon-box-pink" style="width:34px;height:34px;border-radius:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </span>
+            <div>
+              <div class="stat-strip-val tabular">140+</div>
+              <div class="stat-strip-lbl">Awards</div>
+            </div>
+          </div>
+          <div class="stat-strip-item">
+            <span class="icon-box icon-box-gray" style="width:34px;height:34px;border-radius:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </span>
+            <div>
+              <div class="stat-strip-val tabular">28</div>
+              <div class="stat-strip-lbl">Nations</div>
+            </div>
+          </div>
+          <div class="stat-strip-item">
+            <span class="icon-box icon-box-pink" style="width:34px;height:34px;border-radius:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            </span>
+            <div>
+              <div class="stat-strip-val tabular">HK$1,000</div>
+              <div class="stat-strip-lbl">Disbursed</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Subsidies -->
+        <div class="section-row">
+          <h2 class="section-title">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span>Core Subsidies</span>
+          </h2>
+          <span class="section-meta">TIER A &amp; B</span>
+        </div>
+
+        <div class="stack-12 desktop-2col">
+          <button type="button" class="card card-interactive" data-nav="screen-help">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-box icon-box-gray">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/></svg>
+              </span>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <span style="font-size:15px;font-weight:700;">100% Subsidy</span>
+                  <span class="badge badge-crimson">GRANT</span>
+                </div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Full registration &amp; entrance coverage</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </button>
+
+          <button type="button" class="card card-interactive" data-nav="screen-help">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-box icon-box-gray">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+              </span>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <span style="font-size:15px;font-weight:700;" class="tabular">Max HK$1,000</span>
+                  <span class="badge badge-gray">LOGISTICS</span>
+                </div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Prototype courier &amp; customs transit</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </button>
+
+          <button type="button" class="card card-interactive" data-nav="screen-apply-1">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-box icon-box-gray">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <span style="font-size:15px;font-weight:700;">Multi-Tier Sign-off</span>
+                  <span class="badge badge-gray">FAST-TRACK</span>
+                </div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Academic advisor &amp; faculty approved</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </button>
+        </div>
+
+        <!-- Accredited Global Competitions -->
+        <div class="section-row">
+          <h2 class="section-kicker">ACCREDITED GLOBAL COMPETITIONS</h2>
+          <button type="button" class="section-link" id="btn-list-2026">List 2026</button>
+        </div>
+        <div class="chip-scroll" role="list">
+          <button type="button" class="comp-chip" data-quick-apply="Red Dot 2026"><span class="dot dot-crimson"></span>Red Dot</button>
+          <button type="button" class="comp-chip" data-quick-apply="iF Design 2026"><span class="dot dot-dark"></span>iF Design</button>
+          <button type="button" class="comp-chip" data-quick-apply="D&AD New Blood"><span class="dot dot-gray"></span>D&amp;AD</button>
+          <button type="button" class="comp-chip" data-quick-apply="Golden Pin 2026"><span class="dot dot-gray"></span>IDEA Award</button>
+        </div>
+
+        <!-- PolyU Student Portal SSO Card -->
+        <div class="card" style="margin-top:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+              <span class="icon-box icon-box-gray" style="border-radius:50%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <div style="min-width:0;">
+                <div style="font-size:14px;font-weight:700;">PolyU Student Portal</div>
+                <div style="font-size:11px;color:var(--text-secondary);">Single Sign-On authentication</div>
+              </div>
+            </div>
+            <button type="button" id="btn-netid-sso" class="btn btn-dark btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+              <span>NetID</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 2: STUDENT DASHBOARD
+           ========================================================= -->
+      <section id="screen-dashboard" class="screen" aria-labelledby="dash-greeting-heading">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+            <span class="icon-box icon-box-gray" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+            </span>
+            <div style="min-width:0;">
+              <h1 id="dash-greeting-heading" style="margin:0;font-size:18px;font-weight:800;display:flex;align-items:center;gap:6px;">
+                <span>Hello, Chan Tai Man</span>
+                <span class="dot dot-crimson" aria-hidden="true"></span>
+              </h1>
+              <div style="font-size:12px;color:var(--text-secondary);">School of Design · Yr 3</div>
+            </div>
+          </div>
+          <span class="badge badge-gray"><span class="dot dot-crimson"></span>AY 2026/27</span>
+        </div>
+
+        <div class="desktop-2col">
+          <div class="stack-16">
+            <!-- Subsidy Quota Card -->
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span class="icon-box icon-box-pink" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
+                  </span>
+                  <span class="section-kicker">SUBSIDY QUOTA</span>
+                </div>
+                <span class="badge badge-gray">Active</span>
+              </div>
+              <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
+                <div>
+                  <div id="dash-quota-balance" class="tabular" style="font-size:28px;font-weight:800;line-height:1.1;">HK$850</div>
+                  <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Available balance</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="tabular" style="font-size:15px;font-weight:700;">HK$1,000</div>
+                  <div style="font-size:11px;color:var(--text-secondary);">Total cap</div>
+                </div>
+              </div>
+              <div class="progress-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Remaining subsidy quota">
+                <div id="dash-quota-bar" class="progress-fill" style="width:85%;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);">
+                <span id="dash-quota-pct" style="font-weight:600;color:var(--text-primary);">85% remaining</span>
+                <span>Resets Aug 31</span>
+              </div>
+            </div>
+
+            <!-- 2x2 Summary Stat Grid -->
+            <div class="grid-2">
+              <button type="button" class="card card-interactive" data-dash-filter="all">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                  <span class="icon-box icon-box-gray" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                  </span>
+                  <span class="section-meta">ALL</span>
+                </div>
+                <div id="dash-stat-total" class="tabular" style="font-size:24px;font-weight:800;line-height:1.1;">04</div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Total Grants</div>
+              </button>
+
+              <button type="button" class="card card-interactive" data-dash-filter="pending">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                  <span class="icon-box icon-box-gray" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </span>
+                  <span class="badge badge-gray"><span class="dot dot-crimson"></span>1 DUE</span>
+                </div>
+                <div id="dash-stat-pending" class="tabular" style="font-size:24px;font-weight:800;line-height:1.1;">01</div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">In Review</div>
+              </button>
+
+              <button type="button" class="card card-interactive" data-dash-filter="approved">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                  <span class="icon-box icon-box-green" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  </span>
+                  <span class="badge badge-green">VALID</span>
+                </div>
+                <div id="dash-stat-approved" class="tabular" style="font-size:24px;font-weight:800;line-height:1.1;color:var(--green);">02</div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Approved</div>
+              </button>
+
+              <button type="button" class="card card-interactive" data-dash-filter="disbursed">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                  <span class="icon-box icon-box-gray" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                  </span>
+                  <span class="section-meta">HIST</span>
+                </div>
+                <div id="dash-stat-closed" class="tabular" style="font-size:24px;font-weight:800;line-height:1.1;">01</div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Closed</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="stack-16">
+            <!-- Required Actions -->
+            <div>
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-title">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                  <span>Required Actions</span>
+                </h2>
+                <span id="dash-action-badge" class="badge badge-crimson-solid">1</span>
+              </div>
+              <div class="card">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+                    <span class="icon-box icon-box-pink">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/></svg>
+                    </span>
+                    <div style="min-width:0;">
+                      <div style="font-size:14px;font-weight:700;">Upload Shipping Receipt</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">iF Student Award 2026</div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm" data-nav="screen-reimburse">Upload &rarr;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spotlight Gallery Banner -->
+            <div class="card" style="padding:0;overflow:hidden;">
+              <div style="position:relative;aspect-ratio:16/9;background:#1F2937;">
+                <img src="/src/assets/images/design_pavilion_studio_1795001917733.jpg" alt="Hong Kong Global Design Pavilion studio prototype showcase" style="width:100%;height:100%;object-fit:cover;" />
+                <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 50%, rgba(0,0,0,0.45) 100%);"></div>
+                <span class="badge" style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,0.92);color:#111827;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Spotlight Gallery
+                </span>
+                <button type="button" class="btn btn-primary btn-sm" style="position:absolute;top:12px;right:12px;border-radius:999px;" data-nav="screen-apply-1">+ New Grant</button>
+              </div>
+              <button type="button" id="btn-pavilion-info" style="width:100%;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;text-align:left;">
+                <div>
+                  <div style="font-size:14px;font-weight:700;">Hong Kong Global Design Pavilion</div>
+                  <div style="font-size:12px;color:var(--text-secondary);">Supported through Scheme B Funding</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              </button>
+            </div>
+
+            <!-- Recent Activity -->
+            <div>
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-title">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                  <span>Recent Activity</span>
+                </h2>
+                <button type="button" class="section-link" data-nav="screen-applications">VIEW ALL</button>
+              </div>
+              <div class="stack-12">
+                <button type="button" class="card card-interactive" data-open-app="APP-2025-089">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-green" style="width:38px;height:38px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:13px;font-weight:700;">Design Concept Grant Approved</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">2 hours ago</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </div>
+                </button>
+                <button type="button" class="card card-interactive" data-open-app="APP-2025-104">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray" style="width:38px;height:38px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:13px;font-weight:700;">Red Dot Junior Entry Submitted</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">Yesterday · 16:45</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </div>
+                </button>
+                <button type="button" class="card card-interactive" data-nav="screen-reimburse">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray" style="width:38px;height:38px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:13px;font-weight:700;">HK$750 Disbursed to Bank</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">3 days ago · HSBC **8102</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 3: MY APPLICATIONS
+           ========================================================= -->
+      <section id="screen-applications" class="screen" aria-labelledby="apps-heading">
+        <h1 id="apps-heading" class="sr-only">My Applications</h1>
+        <div class="search-bar-row">
+          <div class="search-input-wrap">
+            <label for="app-search-input" class="sr-only">Search competition</label>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="app-search-input" class="search-input" type="search" placeholder="Search competition..." />
+          </div>
+          <button type="button" class="add-square-btn" data-nav="screen-apply-1" aria-label="Create new subsidy application">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="filter-row" role="tablist" aria-label="Filter applications by status">
+          <button type="button" class="filter-pill active" data-app-filter="all">All <span class="count-tag" id="cnt-all">4</span></button>
+          <button type="button" class="filter-pill" data-app-filter="draft">Draft <span class="count-tag" id="cnt-draft">1</span></button>
+          <button type="button" class="filter-pill" data-app-filter="pending">Pending <span class="count-tag" id="cnt-pending">1</span></button>
+          <button type="button" class="filter-pill" data-app-filter="approved">Approved <span class="count-tag" id="cnt-approved">1</span></button>
+          <button type="button" class="filter-pill" data-app-filter="disbursed">Disbursed <span class="count-tag" id="cnt-disbursed">1</span></button>
+        </div>
+
+        <!-- KPI Mini-Cards -->
+        <div class="grid-2" style="margin-bottom:16px;">
+          <div class="card" style="display:flex;align-items:center;gap:12px;">
+            <span class="icon-box icon-box-pink" style="width:40px;height:40px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+            </span>
+            <div>
+              <div class="section-kicker" style="font-size:10px;">APPROVED GRANTS</div>
+              <div id="apps-approved-total" class="tabular" style="font-size:16px;font-weight:800;">HK$ 1,000</div>
+            </div>
+          </div>
+          <div class="card" style="display:flex;align-items:center;gap:12px;">
+            <span class="icon-box icon-box-amber" style="width:40px;height:40px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11v4"/><path d="M12 11h3"/></svg>
+            </span>
+            <div>
+              <div class="section-kicker" style="font-size:10px;">IN PROCESS</div>
+              <div id="apps-pending-total" class="tabular" style="font-size:16px;font-weight:800;">1 Pending</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Applications List (populated/updated dynamically via JS) -->
+        <div id="applications-list" class="stack-12 desktop-2col"></div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 4: NEW APPLICATION - STEP 1 & 2 OF 5
+           ========================================================= -->
+      <section id="screen-apply-1" class="screen" aria-labelledby="apply-1-heading">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
+          <h1 id="apply-1-heading" style="margin:0;font-size:13px;font-weight:800;letter-spacing:0.04em;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.4" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>STEP 1–2 OF 5</span>
+          </h1>
+          <span class="badge badge-crimson"><span class="dot dot-crimson"></span>ELIGIBILITY &amp; PROFILE</span>
+        </div>
+
+        <!-- 5-Step Progress Bar -->
+        <div class="stepper" role="list" aria-label="Application progress">
+          <div class="stepper-track" aria-hidden="true"><div class="stepper-track-fill" style="width:25%;"></div></div>
+          <div class="step-node done" role="listitem"><div class="step-circle">&#10003;</div><span class="step-label">Criteria</span></div>
+          <div class="step-node active" role="listitem" aria-current="step"><div class="step-circle">2</div><span class="step-label">Profile</span></div>
+          <div class="step-node" role="listitem"><div class="step-circle">3</div><span class="step-label">Award</span></div>
+          <div class="step-node" role="listitem"><div class="step-circle">4</div><span class="step-label">Budget</span></div>
+          <div class="step-node" role="listitem"><div class="step-circle">5</div><span class="step-label">Submit</span></div>
+        </div>
+
+        <div class="desktop-2col">
+          <!-- Left Column: Auto-Eligibility + Identity -->
+          <div class="stack-16">
+            <div>
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-title">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>Auto-Eligibility</span>
+                </h2>
+                <span class="badge badge-gray"><span class="dot dot-crimson"></span>SIS Live</span>
+              </div>
+              <div class="stack-12">
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-green"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Full-time Student</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">Year 1–4 Undergrad / Postgrad</div>
+                    </div>
+                  </div>
+                  <span style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;" aria-label="Verified">&#10003;</span>
+                </div>
+
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-green"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">School of Design</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">BA / MA Active Enrollment</div>
+                    </div>
+                  </div>
+                  <span style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;" aria-label="Verified">&#10003;</span>
+                </div>
+
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-green"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Quota Balance</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">HK$1,000 Available</div>
+                    </div>
+                  </div>
+                  <span style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;" aria-label="Verified">&#10003;</span>
+                </div>
+
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-green"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Academic Standing</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">GPA &ge; 2.80 Verified</div>
+                    </div>
+                  </div>
+                  <span style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;" aria-label="Verified">&#10003;</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Summary Card -->
+            <div class="card" style="display:flex;align-items:center;gap:14px;">
+              <img src="/src/assets/images/student_portrait_chan_1795001918521.jpg" alt="Portrait of Chan Tai Man" style="width:60px;height:60px;border-radius:14px;object-fit:cover;flex-shrink:0;" />
+              <div style="min-width:0;">
+                <div style="font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px;">
+                  <span>Chan Tai Man</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.4" aria-label="Verified identity"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div style="font-size:12px;color:var(--text-secondary);">BA (Hons) Scheme in Design</div>
+                <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;display:flex;align-items:center;gap:6px;">
+                  <span class="dot dot-crimson" aria-hidden="true"></span>
+                  <span>UG Cohort 2021</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Student Profile Form -->
+          <div class="stack-16">
+            <div class="section-row" style="margin-top:0;">
+              <h2 class="section-title">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" aria-hidden="true"><rect width="18" height="14" x="3" y="5" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M15 10h3"/><path d="M15 14h3"/></svg>
+                <span>Student Profile</span>
+              </h2>
+              <span class="section-meta">SIS AUTO-SYNC</span>
+            </div>
+
+            <form id="form-apply-step1" class="card">
+              <div class="field-group">
+                <div class="field-header">
+                  <label for="inp-student-id" class="field-label">STUDENT ID</label>
+                  <span class="field-hint">Locked</span>
+                </div>
+                <div class="input-shell">
+                  <input id="inp-student-id" type="text" value="21089452D" readonly class="mono" />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field-header">
+                  <label for="inp-student-name" class="field-label">FULL NAME (ENGLISH)</label>
+                </div>
+                <div class="input-shell">
+                  <input id="inp-student-name" type="text" value="Chan Tai Man" readonly />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field-header">
+                  <label for="inp-student-email" class="field-label">INSTITUTIONAL EMAIL</label>
+                </div>
+                <div class="input-shell">
+                  <input id="inp-student-email" type="email" value="tai-man.chan@connect.polyu.hk" readonly />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field-header">
+                  <label for="inp-student-mobile" class="field-label">MOBILE CONTACT</label>
+                  <span class="field-hint crimson">SMS Updates</span>
+                </div>
+                <div class="input-shell editable">
+                  <input id="inp-student-mobile" type="tel" value="+852 9123 4567" required />
+                </div>
+              </div>
+
+              <div class="field-group" style="margin-bottom:0;">
+                <div class="field-header">
+                  <label for="inp-student-stream" class="field-label">ACADEMIC DEPARTMENT &amp; STREAM</label>
+                </div>
+                <div class="input-shell editable">
+                  <select id="inp-student-stream">
+                    <option value="Product &amp; Industrial Design — Yr 3" selected>Product &amp; Industrial Design — Yr 3</option>
+                    <option value="Communication Design — Yr 3">Communication Design — Yr 3</option>
+                    <option value="Environment &amp; Interior Design — Yr 3">Environment &amp; Interior Design — Yr 3</option>
+                    <option value="Advertising Design — Yr 3">Advertising Design — Yr 3</option>
+                    <option value="Interactive Media — Yr 3">Interactive Media — Yr 3</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+            <div class="card" style="background:#F9FAFB;display:flex;gap:12px;align-items:flex-start;">
+              <span class="icon-box icon-box-gray" style="width:34px;height:34px;border-radius:10px;background:#FFFFFF;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </span>
+              <div>
+                <div style="font-size:13px;font-weight:700;">Institutional Validation</div>
+                <p style="margin:3px 0 0;font-size:12px;color:var(--text-secondary);">Information is cross-referenced with Academic Registry database. Quota allocation is conditionally held for 48 hours.</p>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button type="button" id="btn-save-draft-1" class="btn btn-secondary" style="flex:0 0 auto;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                <span>Save</span>
+              </button>
+              <button type="button" id="btn-next-step3" class="btn btn-primary" style="flex:1;">
+                <span>Next: Competition &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 5: NEW APPLICATION - STEP 3, 4 & 5 OF 5
+           ========================================================= -->
+      <section id="screen-apply-2" class="screen" aria-labelledby="apply-2-heading">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
+          <h1 id="apply-2-heading" style="margin:0;font-size:13px;font-weight:800;letter-spacing:0.04em;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2.4" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>STEP 3–5 OF 5</span>
+          </h1>
+          <span class="badge badge-crimson"><span class="dot dot-crimson"></span>COMPETITION &amp; GRANT</span>
+        </div>
+
+        <div class="stepper" role="list" aria-label="Application progress">
+          <div class="stepper-track" aria-hidden="true"><div class="stepper-track-fill" style="width:55%;"></div></div>
+          <div class="step-node done" role="listitem"><div class="step-circle">&#10003;</div><span class="step-label">Criteria</span></div>
+          <div class="step-node done" role="listitem"><div class="step-circle">&#10003;</div><span class="step-label">Profile</span></div>
+          <div class="step-node active" role="listitem" aria-current="step"><div class="step-circle">3</div><span class="step-label">Award</span></div>
+          <div class="step-node" role="listitem"><div class="step-circle">4</div><span class="step-label">Budget</span></div>
+          <div class="step-node" role="listitem"><div class="step-circle">5</div><span class="step-label">Submit</span></div>
+        </div>
+
+        <form id="form-apply-step2" class="desktop-2col">
+          <!-- Competition Details -->
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+              <span class="icon-box icon-box-pink">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </span>
+              <div>
+                <h2 style="margin:0;font-size:16px;font-weight:800;">Competition Details</h2>
+                <div style="font-size:12px;color:var(--text-secondary);">Accredited international design tier</div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label" style="margin-bottom:8px;">Accredited Target Directory</div>
+              <div class="dir-grid" role="radiogroup" aria-label="Accredited competition directory">
+                <button type="button" class="dir-option selected" data-target-comp="Red Dot 2026" data-reg="650" data-courier="300"><span>Red Dot 2026</span><span class="radio-dot"></span></button>
+                <button type="button" class="dir-option" data-target-comp="iF Design 2026" data-reg="550" data-courier="250"><span>iF Design 2026</span><span class="radio-dot"></span></button>
+                <button type="button" class="dir-option" data-target-comp="D&amp;AD New Blood" data-reg="450" data-courier="200"><span>D&amp;AD New Blood</span><span class="radio-dot"></span></button>
+                <button type="button" class="dir-option" data-target-comp="Golden Pin 2026" data-reg="500" data-courier="250"><span>Golden Pin 2026</span><span class="radio-dot"></span></button>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-header"><label for="inp-project-title" class="field-label">Project / Entry Title</label></div>
+              <div class="input-shell editable">
+                <input id="inp-project-title" type="text" value="Modular Kinetic Urban Air Filter X1" required />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-header"><label for="inp-entry-url" class="field-label">Official Competition Entry URL</label></div>
+              <div class="input-shell editable">
+                <input id="inp-entry-url" type="url" value="https://www.red-dot.org/design-concept/urban-filter-x1" required />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-header"><label for="inp-deadline" class="field-label">Submission Deadline</label></div>
+              <div class="input-shell editable">
+                <input id="inp-deadline" type="date" value="2025-11-15" required />
+              </div>
+            </div>
+
+            <div class="field-group" style="margin-bottom:0;">
+              <div class="field-label" style="margin-bottom:8px;">Participation Structure</div>
+              <div class="segmented" role="radiogroup" aria-label="Participation structure">
+                <button type="button" class="seg-btn" data-part="Individual">Individual</button>
+                <button type="button" class="seg-btn active" data-part="Team (3 Members)">Team (3 Members)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grant Summary & Budget -->
+          <div class="stack-16">
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="icon-box icon-box-pink">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="8" x2="8.01" y1="10" y2="10"/><line x1="12" x2="12.01" y1="10" y2="10"/><line x1="16" x2="16.01" y1="10" y2="10"/><line x1="8" x2="8.01" y1="14" y2="14"/><line x1="12" x2="12.01" y1="14" y2="14"/><line x1="16" x2="16.01" y1="14" y2="14"/></svg>
+                  </span>
+                  <div>
+                    <h2 style="margin:0;font-size:16px;font-weight:800;">Grant Summary</h2>
+                    <div style="font-size:12px;color:var(--text-secondary);">Pre-approved scheme matrix</div>
+                  </div>
+                </div>
+                <span class="badge badge-crimson"><span class="dot dot-crimson"></span>TIER A: 100%</span>
+              </div>
+
+              <div class="stack-12" style="margin-bottom:14px;">
+                <div style="border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div>
+                    <label for="inp-reg-fee" style="font-size:13px;font-weight:700;display:block;">Early Bird Registration</label>
+                    <div style="font-size:11px;color:var(--text-secondary);">Standard Cap: HK$ 1,000</div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="display:inline-flex;align-items:center;gap:4px;">
+                      <span style="font-size:13px;font-weight:700;">HK$</span>
+                      <input id="inp-reg-fee" type="number" min="0" max="1000" step="10" value="650" class="tabular" style="width:68px;text-align:right;border:1px solid var(--border);border-radius:8px;padding:3px 6px;font-size:14px;font-weight:800;" />
+                    </div>
+                    <div style="margin-top:4px;"><span class="badge badge-green">100% Covered</span></div>
+                  </div>
+                </div>
+
+                <div style="border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div>
+                    <label for="inp-courier-fee" style="font-size:13px;font-weight:700;display:block;">Courier &amp; Customs Transit</label>
+                    <div style="font-size:11px;color:var(--text-secondary);">Prototype Cap: HK$ 1,000</div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="display:inline-flex;align-items:center;gap:4px;">
+                      <span style="font-size:13px;font-weight:700;">HK$</span>
+                      <input id="inp-courier-fee" type="number" min="0" max="1000" step="10" value="300" class="tabular" style="width:68px;text-align:right;border:1px solid var(--border);border-radius:8px;padding:3px 6px;font-size:14px;font-weight:800;" />
+                    </div>
+                    <div style="margin-top:4px;"><span class="badge badge-green">100% Covered</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:#F9FAFB;border:1px solid var(--border);border-radius:16px;padding:14px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
+                  <div>
+                    <div class="section-kicker" style="font-size:10px;">TOTAL REQUESTED</div>
+                    <div style="font-size:12px;color:var(--text-secondary);">Reimbursable Subsidy</div>
+                  </div>
+                  <div id="grant-total-display" class="tabular" style="font-size:24px;font-weight:800;color:var(--crimson);">HK$ 950</div>
+                </div>
+                <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;">
+                  <span style="font-weight:600;color:var(--text-secondary);">Student Lifetime Quota</span>
+                  <span class="tabular" style="font-weight:800;">HK$ 1,000 &rarr; <span id="grant-quota-after" style="color:var(--crimson);">HK$ 50</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="background:#F9FAFB;display:flex;gap:12px;align-items:flex-start;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <p style="margin:0;font-size:12px;color:var(--text-secondary);">All financial amounts adhere to PolyU Global Design Participation guidelines. Receipts and proof of submission must be attached in Step 6.</p>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button type="button" class="btn btn-secondary" data-nav="screen-apply-1">&larr; Back</button>
+              <button type="button" id="btn-review-submit" class="btn btn-primary" style="flex:1;">Review &amp; Upload &rarr;</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 6: REIMBURSEMENT PORTAL
+           ========================================================= -->
+      <section id="screen-reimburse" class="screen" aria-labelledby="reimburse-heading">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="icon-box icon-box-pink">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+            </span>
+            <div>
+              <h1 id="reimburse-heading" style="margin:0;font-size:18px;font-weight:800;">Reimbursement</h1>
+              <div class="section-kicker" style="font-size:10px;">DISBURSEMENT PORTAL</div>
+            </div>
+          </div>
+          <span class="badge badge-crimson">&#10003; POST-APPROVAL</span>
+        </div>
+
+        <div class="desktop-2col">
+          <div class="stack-16">
+            <!-- Grant Selector Card -->
+            <div class="card">
+              <label for="reimburse-grant-select" class="section-kicker" style="color:var(--crimson);font-size:10px;display:block;margin-bottom:4px;">SELECTED APPROVED GRANT</label>
+              <select id="reimburse-grant-select" style="width:100%;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:15px;font-weight:800;background:#FAFAFB;color:var(--text-primary);">
+                <option value="GDP-RD25-884" selected>Red Dot Award 2026 (REF: GDP-RD25-884)</option>
+                <option value="GDP-IF25-104">iF Student Award 2026 (REF: GDP-IF25-104)</option>
+              </select>
+            </div>
+
+            <!-- Approved Subsidy Card -->
+            <div class="card" style="background:radial-gradient(circle at 90% 80%, #FCECEF 0%, #FFFFFF 60%);">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="section-kicker">APPROVED SUBSIDY</span>
+                <span class="badge badge-crimson">GRANTED</span>
+              </div>
+              <div id="reimburse-amount" class="tabular" style="font-size:28px;font-weight:800;margin-bottom:12px;">HK$ 1,000.00</div>
+              <div style="background:#F9FAFB;border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+                <span style="font-weight:700;">HSBC Direct</span>
+                <span class="mono" style="color:var(--text-secondary);"><span class="dot dot-crimson" style="margin-right:5px;"></span>ACCT ••8102</span>
+              </div>
+            </div>
+
+            <!-- Disbursement Flow Stepper -->
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                <span style="font-size:14px;font-weight:700;">Disbursement Flow</span>
+                <span id="reimburse-flow-badge" class="badge badge-crimson">STEP 2 OF 4</span>
+              </div>
+              <div class="stepper" style="margin-bottom:0;">
+                <div class="stepper-track" aria-hidden="true"><div id="reimburse-flow-bar" class="stepper-track-fill" style="width:36%;"></div></div>
+                <div class="step-node done"><div class="step-circle">&#10003;</div><span class="step-label">Receipts</span></div>
+                <div class="step-node active" id="flow-step-review"><div class="step-circle">2</div><span class="step-label">Review</span></div>
+                <div class="step-node" id="flow-step-payout"><div class="step-circle">3</div><span class="step-label">Payout</span></div>
+                <div class="step-node"><div class="step-circle">4</div><span class="step-label">Settled</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-16">
+            <!-- Required Proofs -->
+            <div>
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-title">Required Proofs</h2>
+                <span id="proofs-status-badge" class="badge badge-crimson">! 1 ACTION NEEDED</span>
+              </div>
+              <div class="stack-12">
+                <!-- Proof 1 -->
+                <div class="card">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;">
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Registration Receipt</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">Entry category registration fees</div>
+                    </div>
+                    <span class="badge badge-green">&#10003; HK$ 750</span>
+                  </div>
+                  <div style="background:#F9FAFB;border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <div style="min-width:0;">
+                      <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Receipt_RedDot_Official.pdf</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">1.4 MB · Stamped</div>
+                    </div>
+                    <div style="display:flex;gap:6px;">
+                      <button type="button" class="icon-btn" style="width:36px;height:36px;border:1px solid var(--border);border-radius:10px;background:#fff;" data-preview-doc="Receipt_RedDot_Official.pdf" aria-label="Preview Registration Receipt">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Proof 2 (Interactive Upload) -->
+                <div class="card">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;">
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Customs &amp; Freight Proof</div>
+                      <div style="font-size:11px;color:var(--text-secondary);">Shipment of prototype models</div>
+                    </div>
+                    <div style="text-align:right;">
+                      <span id="freight-required-badge" class="badge badge-crimson-solid">REQUIRED</span>
+                      <div class="mono" style="font-size:10px;color:var(--text-secondary);margin-top:2px;">Max $1,000</div>
+                    </div>
+                  </div>
+
+                  <div id="freight-dropzone" class="dropzone">
+                    <div style="width:42px;height:42px;border-radius:50%;background:var(--crimson-soft);color:var(--crimson);display:inline-flex;align-items:center;justify-content:center;margin-bottom:8px;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                    </div>
+                    <div style="font-size:14px;font-weight:700;">Upload Delivery Receipt</div>
+                    <div style="font-size:12px;color:var(--text-secondary);margin:4px 0 12px;">Waybill, air freight bill or courier invoice</div>
+                    <label for="inp-freight-file" class="btn btn-dark btn-sm" style="cursor:pointer;">Choose File</label>
+                    <input id="inp-freight-file" type="file" accept=".pdf,.jpg,.jpeg,.png" class="sr-only" />
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">PDF, JPG up to 10MB</div>
+                  </div>
+
+                  <div id="freight-uploaded-row" style="display:none;margin-top:10px;background:#F9FAFB;border:1px solid var(--border);border-radius:12px;padding:10px 12px;align-items:center;justify-content:space-between;gap:8px;">
+                    <div style="min-width:0;">
+                      <div id="freight-file-name" style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Waybill_DHL_2026.pdf</div>
+                      <div id="freight-file-meta" style="font-size:11px;color:var(--green);">Uploaded · Ready for review</div>
+                    </div>
+                    <button type="button" id="btn-remove-freight" class="icon-btn" style="width:36px;height:36px;border:1px solid var(--border);border-radius:10px;background:#fff;" aria-label="Remove uploaded freight proof">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Disbursement Account -->
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span style="font-size:15px;font-weight:800;">Disbursement Account</span>
+                <span class="badge badge-gray">SIS ENCRYPTED</span>
+              </div>
+              <div class="stack-12" style="gap:8px;font-size:13px;">
+                <div style="display:flex;justify-content:space-between;padding:8px 10px;background:#F9FAFB;border-radius:10px;">
+                  <span style="color:var(--text-secondary);">Target Bank</span>
+                  <span style="font-weight:700;">HSBC Hong Kong</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 10px;background:#F9FAFB;border-radius:10px;">
+                  <span style="color:var(--text-secondary);">Recipient</span>
+                  <span style="font-weight:700;">Alex Chan Ming-wai</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 10px;background:#F9FAFB;border-radius:10px;">
+                  <span style="color:var(--text-secondary);">Account No.</span>
+                  <span class="mono" style="font-weight:700;">•••-•••-8102</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--crimson-soft);border-radius:12px;">
+                  <div>
+                    <div class="section-kicker" style="font-size:10px;color:var(--crimson);">ESTIMATED PAYOUT</div>
+                    <div style="font-size:12px;color:var(--text-primary);">Upon proof validation</div>
+                  </div>
+                  <div style="font-size:14px;font-weight:800;color:var(--crimson);">3–5 Days</div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" id="btn-confirm-payout" class="btn btn-primary btn-block">Confirm &amp; Proceed to Payout</button>
+            <button type="button" id="btn-reimburse-pdf" class="btn btn-secondary btn-block">Summary PDF</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 7: RESULTS & PROFILE SETTINGS
+           ========================================================= -->
+      <section id="screen-profile" class="screen" aria-labelledby="profile-heading">
+        <h1 id="profile-heading" class="sr-only">Results and Profile Settings</h1>
+
+        <!-- Segmented Tab Switcher -->
+        <div class="segmented" role="tablist" aria-label="Results and Profile views" style="margin-bottom:16px;">
+          <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-profile-tab="results">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            <span>Results</span>
+          </button>
+          <button type="button" class="seg-btn" role="tab" aria-selected="false" data-profile-tab="settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Profile</span>
+          </button>
+        </div>
+
+        <!-- Sub-view A: Results -->
+        <div id="subview-results" class="desktop-2col">
+          <div class="stack-16">
+            <!-- Competition Dropdown Card -->
+            <div class="card">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span class="icon-box icon-box-gray">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                </span>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <label for="result-comp-select" class="sr-only">Select competition for results</label>
+                    <select id="result-comp-select" style="font-size:15px;font-weight:800;border:none;background:transparent;color:var(--text-primary);padding:0;outline:none;">
+                      <option value="Red Dot 2026" selected>Red Dot 2026</option>
+                      <option value="iF Design Talent Award 2026">iF Design Talent Award 2026</option>
+                      <option value="Golden Pin Design Concept">Golden Pin Design Concept</option>
+                    </select>
+                    <span class="badge badge-crimson-solid">TIER A</span>
+                  </div>
+                  <div id="result-comp-sub" style="font-size:12px;color:var(--text-secondary);">Design Concept · Berlin</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Award Tier Selection -->
+            <div>
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-kicker">AWARD TIER</h2>
+                <span id="award-tier-bonus" class="tabular" style="font-size:12px;font-weight:800;color:var(--crimson);">HK$ 1,000</span>
+              </div>
+              <div class="stack-12" role="radiogroup" aria-label="Select award tier">
+                <button type="button" class="card card-interactive award-option selected" data-tier="Winner / Best of Best" data-bonus="HK$ 1,000" style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-color:var(--green);">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-pink"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Winner / Best of Best</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">Grand Prize Standing</div>
+                    </div>
+                  </div>
+                  <span class="award-check" style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;">&#10003;</span>
+                </button>
+
+                <button type="button" class="card card-interactive award-option" data-tier="Honourable Mention" data-bonus="[Placeholder]" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Honourable Mention</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">Special Commendation</div>
+                    </div>
+                  </div>
+                  <span class="award-check" style="width:24px;height:24px;border-radius:50%;background:var(--surface-muted);color:transparent;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;">&#10003;</span>
+                </button>
+
+                <button type="button" class="card card-interactive award-option" data-tier="Shortlisted / Finalist" data-bonus="[Placeholder]" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+                    <div>
+                      <div style="font-size:14px;font-weight:700;">Shortlisted / Finalist</div>
+                      <div style="font-size:12px;color:var(--text-secondary);">Official Selection</div>
+                    </div>
+                  </div>
+                  <span class="award-check" style="width:24px;height:24px;border-radius:50%;background:var(--surface-muted);color:transparent;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;">&#10003;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-16">
+            <!-- Official Certificate Upload -->
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                  <span>Official Certificate</span>
+                </div>
+                <span class="badge badge-gray">PDF · JPG · Max 15MB</span>
+              </div>
+
+              <div id="cert-dropzone" class="dropzone" style="margin-bottom:12px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--crimson-soft);color:var(--crimson);display:inline-flex;align-items:center;justify-content:center;margin-bottom:8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                </div>
+                <div style="font-size:14px;font-weight:700;">Drop certificate here</div>
+                <label for="inp-cert-file" style="display:block;font-size:12px;color:var(--crimson);font-weight:700;cursor:pointer;margin:4px 0 10px;">Or browse device</label>
+                <input id="inp-cert-file" type="file" accept=".pdf,.jpg,.jpeg,.png" class="sr-only" />
+                <div style="display:flex;justify-content:center;gap:6px;">
+                  <span class="badge badge-gray">PDF</span>
+                  <span class="badge badge-gray">JPG</span>
+                  <span class="badge badge-gray">Max 15MB</span>
+                </div>
+              </div>
+
+              <div id="cert-uploaded-row" style="background:#F9FAFB;border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+                  <span class="icon-box icon-box-pink" style="width:36px;height:36px;border-radius:10px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </span>
+                  <div style="min-width:0;">
+                    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                      <span id="cert-file-name" style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;">reddot_2026_winner_cert.pdf</span>
+                      <span class="badge badge-green">&#10003; Verified</span>
+                    </div>
+                    <div id="cert-file-meta" style="font-size:11px;color:var(--text-secondary);">1.8 MB · Uploaded</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px;flex-shrink:0;">
+                  <button type="button" class="icon-btn" style="width:34px;height:34px;border:1px solid var(--border);border-radius:9px;background:#fff;" data-preview-doc="reddot_2026_winner_cert.pdf" aria-label="Preview uploaded certificate">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                  <button type="button" id="btn-remove-cert" class="icon-btn" style="width:34px;height:34px;border:1px solid var(--border);border-radius:9px;background:#fff;" aria-label="Delete certificate">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Honorarium Bonus Card -->
+            <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span class="icon-box" style="background:var(--crimson);color:#fff;">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
+                </span>
+                <div>
+                  <div style="font-size:12px;color:var(--text-secondary);">Honorarium Bonus</div>
+                  <div id="honorarium-amount" class="tabular" style="font-size:20px;font-weight:800;color:var(--crimson);">HK$ 1,000</div>
+                </div>
+              </div>
+              <span class="badge badge-gray">DISBURSED POST-AUDIT</span>
+            </div>
+
+            <button type="button" id="btn-submit-result" class="btn btn-primary btn-block">&#10003; Save &amp; Submit Result</button>
+          </div>
+        </div>
+
+        <!-- Sub-view B: Profile Settings & Help Link -->
+        <div id="subview-settings" style="display:none;" class="desktop-2col">
+          <div class="stack-16">
+            <div class="card" style="display:flex;align-items:center;gap:14px;">
+              <img src="/src/assets/images/student_portrait_chan_1795001918521.jpg" alt="Chan Tai Man portrait" style="width:64px;height:64px;border-radius:16px;object-fit:cover;flex-shrink:0;" />
+              <div>
+                <div style="font-size:17px;font-weight:800;">Chan Tai Man</div>
+                <div style="font-size:12px;color:var(--text-secondary);">BA (Hons) Scheme in Design · Yr 3</div>
+                <div class="mono" style="font-size:12px;color:var(--crimson);margin-top:4px;">ID: 21089452D</div>
+              </div>
+            </div>
+
+            <div class="card stack-12">
+              <h2 style="margin:0;font-size:15px;font-weight:800;">Account &amp; Notification Settings</h2>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
+                <div>
+                  <div style="font-size:13px;font-weight:700;">SMS Status Updates</div>
+                  <div style="font-size:11px;color:var(--text-secondary);">+852 9123 4567</div>
+                </div>
+                <input type="checkbox" id="toggle-sms" checked aria-label="Toggle SMS Status Updates" style="width:20px;height:20px;accent-color:var(--crimson);" />
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;">
+                <div>
+                  <div style="font-size:13px;font-weight:700;">Institutional Email Alerts</div>
+                  <div style="font-size:11px;color:var(--text-secondary);">tai-man.chan@connect.polyu.hk</div>
+                </div>
+                <input type="checkbox" id="toggle-email" checked aria-label="Toggle Institutional Email Alerts" style="width:20px;height:20px;accent-color:var(--crimson);" />
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-16">
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                <h2 style="margin:0;font-size:15px;font-weight:800;">Linked Payout Account</h2>
+                <span class="badge badge-gray">SIS ENCRYPTED</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);">HSBC Hong Kong · Account <span class="mono">•••-•••-8102</span></div>
+            </div>
+
+            <button type="button" class="card card-interactive" data-nav="screen-help" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span class="icon-box icon-box-pink">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                </span>
+                <div>
+                  <div style="font-size:15px;font-weight:800;">Help &amp; Guidelines</div>
+                  <div style="font-size:12px;color:var(--text-secondary);">Funding structure, FAQs &amp; direct advisory</div>
+                </div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 8: HELP & GUIDELINES
+           ========================================================= -->
+      <section id="screen-help" class="screen" aria-labelledby="help-heading">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="icon-box icon-box-pink">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+            </span>
+            <div>
+              <h1 id="help-heading" style="margin:0;font-size:20px;font-weight:800;">Help &amp; Guidelines</h1>
+              <div style="font-size:12px;color:var(--text-secondary);">Fast self-service &amp; advisory</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" data-nav="screen-profile">&larr; Back</button>
+        </div>
+
+        <!-- 2x2 Quick Guide Cards -->
+        <div class="grid-2" style="margin-bottom:16px;">
+          <a href="#help-inquiries" class="card card-interactive" style="display:flex;align-items:center;gap:10px;">
+            <span class="icon-box icon-box-gray" style="width:38px;height:38px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>
+            <div><div style="font-size:13px;font-weight:700;">Policy Guide</div><div style="font-size:11px;color:var(--text-secondary);">Official Rules</div></div>
+          </a>
+          <a href="#help-funding" class="card card-interactive" style="display:flex;align-items:center;gap:10px;">
+            <span class="icon-box icon-box-pink" style="width:38px;height:38px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <div><div style="font-size:13px;font-weight:700;">Funding Caps</div><div style="font-size:11px;color:var(--text-secondary);">Tiers &amp; Limits</div></div>
+          </a>
+          <a href="#help-funding" class="card card-interactive" style="display:flex;align-items:center;gap:10px;">
+            <span class="icon-box icon-box-gray" style="width:38px;height:38px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <div><div style="font-size:13px;font-weight:700;">Deadlines</div><div style="font-size:11px;color:var(--text-secondary);">Timeline Guide</div></div>
+          </a>
+          <a href="#help-support" class="card card-interactive" style="display:flex;align-items:center;gap:10px;">
+            <span class="icon-box icon-box-gray" style="width:38px;height:38px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span>
+            <div><div style="font-size:13px;font-weight:700;">Advisory</div><div style="font-size:11px;color:var(--text-secondary);">Direct Help</div></div>
+          </a>
+        </div>
+
+        <div class="desktop-2col">
+          <div class="stack-16">
+            <!-- Funding Structure -->
+            <div id="help-funding">
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-kicker">FUNDING STRUCTURE</h2>
+                <span style="font-size:11px;font-weight:800;color:var(--crimson);">2025 AY</span>
+              </div>
+              <div class="stack-12">
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-pink"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/></svg></span>
+                    <div><div style="font-size:14px;font-weight:700;">Entry Fees</div><div style="font-size:11px;color:var(--text-secondary);">Standard reimbursement</div></div>
+                  </div>
+                  <div style="text-align:right;"><span class="badge badge-gray">100% Coverage</span><div style="font-size:11px;font-weight:700;color:var(--crimson);margin-top:3px;">HK$1,000 Cap</div></div>
+                </div>
+
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span>
+                    <div><div style="font-size:14px;font-weight:700;">Logistics &amp; Postal</div><div style="font-size:11px;color:var(--text-secondary);">Material freight</div></div>
+                  </div>
+                  <div style="text-align:right;"><span class="badge badge-gray">Max Claim</span><div style="font-size:11px;font-weight:700;margin-top:3px;">HK$1,000 Cap</div></div>
+                </div>
+
+                <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="icon-box icon-box-gray"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></span>
+                    <div><div style="font-size:14px;font-weight:700;">Submission Window</div><div style="font-size:11px;color:var(--text-secondary);">Prior to deadline</div></div>
+                  </div>
+                  <div style="text-align:right;"><span class="badge badge-gray">&ge; 14 Days</span><div style="font-size:11px;font-weight:700;margin-top:3px;">Strict Policy</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Innovation Tower Banner -->
+            <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/9;background:#1F2937;">
+              <img src="/src/assets/images/innovation_tower_hub_1795001918436.jpg" alt="PolyU Jockey Club Innovation Tower architectural view" style="width:100%;height:100%;object-fit:cover;" />
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg, transparent 35%, rgba(0,0,0,0.78) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;color:#fff;">
+                <div style="font-size:11px;font-weight:700;opacity:0.9;margin-bottom:2px;">Design Excellence</div>
+                <div style="font-size:18px;font-weight:800;">World Competitions Hub</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-16">
+            <!-- Common Inquiries Accordion -->
+            <div id="help-inquiries">
+              <div class="section-row" style="margin-top:0;">
+                <h2 class="section-kicker">COMMON INQUIRIES</h2>
+                <span style="font-size:11px;color:var(--text-secondary);font-weight:600;">Tap to Expand</span>
+              </div>
+              <div class="stack-12">
+                <div class="accordion-item">
+                  <button type="button" class="accordion-trigger" aria-expanded="false">
+                    <span style="display:flex;align-items:center;gap:10px;min-width:0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" style="flex-shrink:0;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                      <span>Apply for multiple competitions?</span>
+                    </span>
+                    <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                      <span class="badge badge-gray">HK$1,000 Cap</span>
+                      <svg class="chev-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                  </button>
+                  <div class="accordion-panel">[Placeholder: Official multi-competition eligibility wording to be inserted from the School of Design AY 2026/2027 handbook. Total student quota cap shown in portal: HK$1,000.]</div>
+                </div>
+
+                <div class="accordion-item">
+                  <button type="button" class="accordion-trigger" aria-expanded="false">
+                    <span style="display:flex;align-items:center;gap:10px;min-width:0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" style="flex-shrink:0;" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <span>Reimbursement disbursement time?</span>
+                    </span>
+                    <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                      <span class="badge badge-gray">3-5 Days</span>
+                      <svg class="chev-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                  </button>
+                  <div class="accordion-panel">Estimated payout is 3–5 days upon proof validation via the Reimbursement Portal. [Placeholder: Additional finance office processing notes.]</div>
+                </div>
+
+                <div class="accordion-item">
+                  <button type="button" class="accordion-trigger" aria-expanded="false">
+                    <span style="display:flex;align-items:center;gap:10px;min-width:0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" style="flex-shrink:0;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                      <span>Team project distribution?</span>
+                    </span>
+                    <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                      <span class="badge badge-gray">Pro-rata</span>
+                      <svg class="chev-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                  </button>
+                  <div class="accordion-panel">Team allocations are handled on a pro-rata basis. [Placeholder: Detailed team member distribution instructions to be added.]</div>
+                </div>
+
+                <div class="accordion-item">
+                  <button type="button" class="accordion-trigger" aria-expanded="false">
+                    <span style="display:flex;align-items:center;gap:10px;min-width:0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9E0B22" stroke-width="2" style="flex-shrink:0;" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <span>Do late submissions qualify?</span>
+                    </span>
+                    <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                      <span class="badge badge-crimson">Prior Approval</span>
+                      <svg class="chev-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                  </button>
+                  <div class="accordion-panel">Submission window is &ge; 14 days prior to deadline; exceptions require Prior Approval. [Placeholder: Approval workflow details.]</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Support Channels -->
+            <div id="help-support" class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span class="icon-box icon-box-pink" style="width:36px;height:36px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span>
+                  <h2 style="margin:0;font-size:16px;font-weight:800;">Support Channels</h2>
+                </div>
+                <span class="badge badge-gray">Mon-Fri 09-18</span>
+              </div>
+
+              <div class="stack-12" style="gap:8px;margin-bottom:14px;">
+                <div style="background:#F9FAFB;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <div><div style="font-size:13px;font-weight:700;">V810, Innovation Tower</div><div style="font-size:11px;color:var(--text-secondary);">School of Design, PolyU</div></div>
+                </div>
+                <a href="tel:+85227665432" style="background:#F9FAFB;border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <div><div style="font-size:13px;font-weight:700;">+852 2766 5432</div><div style="font-size:11px;color:var(--text-secondary);">Direct Hotline</div></div>
+                  </div>
+                  <span>&rarr;</span>
+                </a>
+                <a href="mailto:gdp.design@polyu.edu.hk" style="background:#F9FAFB;border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <div><div style="font-size:13px;font-weight:700;">gdp.design@polyu.edu.hk</div><div style="font-size:11px;color:var(--text-secondary);">Inquiries Inbox</div></div>
+                  </div>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+
+              <button type="button" id="btn-live-inquiry" class="btn btn-primary btn-block">Live Inquiry</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile & Tablet Bottom Tab Bar -->
+  <nav class="bottom-nav" aria-label="Bottom Navigation">
+    <button type="button" class="nav-tab active" data-nav="screen-home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </button>
+    <button type="button" class="nav-tab" data-nav="screen-dashboard">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button type="button" class="nav-tab" data-nav="screen-applications">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+      <span>Applications</span>
+    </button>
+    <button type="button" class="nav-tab" data-nav="screen-reimburse">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg>
+      <span>Reimburse</span>
+    </button>
+    <button type="button" class="nav-tab" data-nav="screen-profile">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+</div>
+
+<!-- =========================================================
+     MODAL / BOTTOM SHEET OVERLAY
+     ========================================================= -->
+<div id="modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-sheet">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Live Toast Feedback -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------------------------------------------------
+     1. APPLICATION STATE (Grounded strictly in Design Refs)
+     --------------------------------------------------------- */
+  const state = {
+    activeScreen: 'screen-home',
+    appFilter: 'all',
+    appSearch: '',
+    unreadNotifs: true,
+    freightFile: null,
+    certFile: { name: 'reddot_2026_winner_cert.pdf', meta: '1.8 MB · Uploaded' },
+    selectedComp: 'Red Dot 2026',
+    selectedPart: 'Team (3 Members)',
+    selectedAwardTier: 'Winner / Best of Best',
+    applications: [
+      {
+        id: 'APP-2025-089',
+        ref: 'GDP-RD25-884',
+        title: 'Red Dot Design Concept 2026',
+        category: 'Product Design',
+        tierDesc: 'Product Design · International Category A',
+        dateMeta: '15 Oct',
+        amount: 950,
+        status: 'approved',
+        step: 3
+      },
+      {
+        id: 'APP-2025-104',
+        ref: 'GDP-IF25-104',
+        title: 'iF Design Talent Award 2026',
+        category: 'Faculty Tier A',
+        tierDesc: 'Faculty Tier A · Submitted: 3d ago',
+        dateMeta: 'Submitted: 3d ago',
+        amount: 800,
+        status: 'pending',
+        step: 2
+      },
+      {
+        id: 'DRAFT-04',
+        ref: 'DRAFT-SAVED-04',
+        title: 'D&AD New Blood Awards',
+        category: '4/6 Files',
+        tierDesc: 'Draft Application · Edit: 1w ago',
+        dateMeta: 'Edit: 1w ago',
+        amount: 0,
+        status: 'draft',
+        step: 1
+      },
+      {
+        id: 'APP-2024-912',
+        ref: 'GDP-GP24-912',
+        title: 'Golden Pin Design Concept',
+        category: 'Spatial Design',
+        tierDesc: 'Spatial Design · Disbursed',
+        dateMeta: 'Disbursed',
+        amount: 750,
+        status: 'disbursed',
+        step: 4
+      }
+    ]
+  };
+
+  /* ---------------------------------------------------------
+     2. UTILITIES (Toast & Modal)
+     --------------------------------------------------------- */
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+
+  function showToast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2800);
+  }
+
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalBody = document.getElementById('modal-body');
+
+  function openModal(html) {
+    modalBody.innerHTML = html;
+    modalBackdrop.classList.add('open');
+    const closeBtn = modalBody.querySelector('[data-close-modal]');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeModal() {
+    modalBackdrop.classList.remove('open');
+    modalBody.innerHTML = '';
+  }
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+  });
+
+  /* ---------------------------------------------------------
+     3. SCREEN NAVIGATION
+     --------------------------------------------------------- */
+  function getNavGroup(screenId) {
+    if (screenId === 'screen-apply-1' || screenId === 'screen-apply-2') return 'screen-applications';
+    if (screenId === 'screen-help') return 'screen-profile';
+    return screenId;
+  }
+
+  function navigateTo(screenId) {
+    const target = document.getElementById(screenId);
+    if (!target) return;
+
+    document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'));
+    target.classList.add('active');
+    state.activeScreen = screenId;
+
+    const bottomGroup = getNavGroup(screenId);
+    document.querySelectorAll('.nav-tab').forEach((tab) => {
+      tab.classList.toggle('active', tab.dataset.nav === bottomGroup);
+    });
+    document.querySelectorAll('.sidebar-item').forEach((item) => {
+      item.classList.toggle('active', item.dataset.nav === screenId);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', (e) => {
+    const navTrigger = e.target.closest('[data-nav]');
+    if (navTrigger) {
+      navigateTo(navTrigger.dataset.nav);
+      return;
+    }
+
+    const closeTrigger = e.target.closest('[data-close-modal]');
+    if (closeTrigger) {
+      closeModal();
+      return;
+    }
+
+    const openAppTrigger = e.target.closest('[data-open-app]');
+    if (openAppTrigger) {
+      openAppDrawer(openAppTrigger.dataset.openApp);
+      return;
+    }
+
+    const previewTrigger = e.target.closest('[data-preview-doc]');
+    if (previewTrigger) {
+      openDocPreview(previewTrigger.dataset.previewDoc);
+    }
+  });
+
+  /* ---------------------------------------------------------
+     4. HOME & DASHBOARD INTERACTIONS
+     --------------------------------------------------------- */
+  document.querySelectorAll('[data-quick-apply]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetComp = btn.dataset.quickApply;
+      selectTargetCompetition(targetComp);
+      navigateTo('screen-apply-2');
+      showToast('Preselected ' + targetComp);
+    });
+  });
+
+  document.querySelectorAll('[data-dash-filter]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setAppFilter(btn.dataset.dashFilter);
+      navigateTo('screen-applications');
+    });
+  });
+
+  document.getElementById('btn-netid-sso').addEventListener('click', () => {
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">PolyU NetID Single Sign-On</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="card" style="background:#F9FAFB;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:700;">Active Session: Chan Tai Man</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Student ID: 21089452D · School of Design</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">[Placeholder: Institutional SSO redirect endpoint for production environment]</div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button type="button" data-close-modal class="btn btn-secondary" style="flex:1;">Close</button>
+        <button type="button" id="modal-go-dash" class="btn btn-primary" style="flex:1;">Open Dashboard</button>
+      </div>
+    `);
+    document.getElementById('modal-go-dash').addEventListener('click', () => {
+      closeModal();
+      navigateTo('screen-dashboard');
+    });
+  });
+
+  document.getElementById('btn-list-2026').addEventListener('click', () => {
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">Accredited Global Competitions 2026</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="stack-12" style="margin-bottom:16px;">
+        <div class="card"><strong>Red Dot Design Concept 2026</strong><div style="font-size:12px;color:var(--text-secondary);">Tier A · 100% Registration Coverage (Cap: HK$1,000)</div></div>
+        <div class="card"><strong>iF Design Talent Award 2026</strong><div style="font-size:12px;color:var(--text-secondary);">Faculty Tier A · Entry &amp; Courier Subsidy</div></div>
+        <div class="card"><strong>D&amp;AD New Blood Awards</strong><div style="font-size:12px;color:var(--text-secondary);">Accredited International Tier</div></div>
+        <div class="card"><strong>Golden Pin / IDEA Award</strong><div style="font-size:12px;color:var(--text-secondary);">[Placeholder: Full 2026 competition list from School of Design]</div></div>
+      </div>
+      <button type="button" data-close-modal class="btn btn-primary btn-block">Done</button>
+    `);
+  });
+
+  document.querySelectorAll('[data-comp-preview]').forEach((tile) => {
+    tile.addEventListener('click', () => {
+      const name = tile.dataset.compPreview;
+      openModal(`
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">${name}</h2>
+          <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+        </div>
+        <p style="font-size:13px;color:var(--text-secondary);margin:0 0 16px;">Featured PolyU School of Design showcase entry. [Placeholder: Exhibition details and curatorial notes.]</p>
+        <button type="button" id="modal-apply-from-preview" class="btn btn-primary btn-block">Start Subsidy Application</button>
+      `);
+      document.getElementById('modal-apply-from-preview').addEventListener('click', () => {
+        closeModal();
+        navigateTo('screen-apply-1');
+      });
+    });
+  });
+
+  document.getElementById('btn-pavilion-info').addEventListener('click', () => {
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">Hong Kong Global Design Pavilion</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 16px;">Supported through Scheme B Funding. [Placeholder: Pavilion exhibition schedule and student showcase guidelines.]</p>
+      <button type="button" data-close-modal class="btn btn-secondary btn-block">Close</button>
+    `);
+  });
+
+  document.getElementById('btn-notifications').addEventListener('click', () => {
+    state.unreadNotifs = false;
+    document.getElementById('notif-dot').classList.add('hidden');
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">Notifications</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="stack-12" style="margin-bottom:16px;">
+        <div class="card" style="border-color:var(--crimson-border);background:var(--crimson-soft);">
+          <div style="font-size:13px;font-weight:700;color:var(--crimson);">Action Needed: Upload Shipping Receipt</div>
+          <div style="font-size:12px;color:var(--text-secondary);">iF Student Award 2026 · Reimbursement Portal</div>
+        </div>
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;">Design Concept Grant Approved</div>
+          <div style="font-size:12px;color:var(--text-secondary);">2 hours ago · HK$950</div>
+        </div>
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;">HK$750 Disbursed to Bank</div>
+          <div style="font-size:12px;color:var(--text-secondary);">3 days ago · HSBC **8102</div>
+        </div>
+      </div>
+      <button type="button" data-close-modal class="btn btn-secondary btn-block">Close</button>
+    `);
+  });
+
+  /* ---------------------------------------------------------
+     5. MY APPLICATIONS LIST, SEARCH, FILTER & DOSSIER SHEET
+     --------------------------------------------------------- */
+  function renderApplications() {
+    const container = document.getElementById('applications-list');
+    const q = state.appSearch.trim().toLowerCase();
+
+    const counts = { all: state.applications.length, draft: 0, pending: 0, approved: 0, disbursed: 0 };
+    state.applications.forEach((a) => {
+      if (counts[a.status] !== undefined) counts[a.status]++;
+    });
+    document.getElementById('cnt-all').textContent = counts.all;
+    document.getElementById('cnt-draft').textContent = counts.draft;
+    document.getElementById('cnt-pending').textContent = counts.pending;
+    document.getElementById('cnt-approved').textContent = counts.approved;
+    document.getElementById('cnt-disbursed').textContent = counts.disbursed;
+
+    document.getElementById('dash-stat-total').textContent = String(counts.all).padStart(2, '0');
+    document.getElementById('dash-stat-pending').textContent = String(counts.pending).padStart(2, '0');
+    document.getElementById('dash-stat-approved').textContent = String(counts.approved + counts.disbursed).padStart(2, '0');
+
+    const filtered = state.applications.filter((app) => {
+      const matchFilter = state.appFilter === 'all' || app.status === state.appFilter;
+      const matchSearch = !q || app.title.toLowerCase().includes(q) || app.ref.toLowerCase().includes(q) || app.category.toLowerCase().includes(q);
+      return matchFilter && matchSearch;
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = `<div class="card" style="text-align:center;padding:28px 16px;grid-column:1/-1;"><div style="font-size:14px;font-weight:700;">No matching applications</div><div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Try another filter or create a new subsidy application.</div></div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map((app) => {
+      if (app.status === 'draft') {
+        return `
+          <div class="card card-draft">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+              <div style="display:flex;gap:12px;min-width:0;">
+                <span class="icon-box icon-box-amber">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                </span>
+                <div style="min-width:0;">
+                  <div style="font-size:15px;font-weight:800;">${app.title}</div>
+                  <div class="mono" style="font-size:11px;color:var(--text-secondary);margin-top:2px;">REF: ${app.ref}</div>
+                  <div style="font-size:11px;color:var(--text-secondary);margin-top:8px;">${app.dateMeta}</div>
+                </div>
+              </div>
+              <span class="badge badge-amber"><span class="dot dot-amber"></span>DRAFT</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;">
+              <span class="badge badge-amber">${app.category}</span>
+              <button type="button" class="badge badge-amber" style="border:1px dashed var(--amber-border);padding:5px 10px;" data-resume-draft="true">Pending Calc &rarr;</button>
+            </div>
+          </div>
+        `;
+      }
+
+      const iconClass = app.status === 'pending' ? 'icon-box-gray' : 'icon-box-pink';
+      const statusBadge = app.status === 'disbursed' ? 'Disbursed · ' + app.category : app.dateMeta + ' · ' + app.category;
+      return `
+        <button type="button" class="card card-interactive" data-open-app="${app.id}">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div style="display:flex;gap:12px;min-width:0;">
+              <span class="icon-box ${iconClass}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </span>
+              <div style="min-width:0;">
+                <div style="font-size:15px;font-weight:800;">${app.title}</div>
+                <div class="mono" style="font-size:11px;color:var(--text-secondary);margin-top:2px;">REF: ${app.ref}</div>
+              </div>
+            </div>
+            <span class="badge badge-gray tabular">HK$${app.amount}</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #F3F4F6;">
+            <span style="font-size:11px;color:var(--text-secondary);">${statusBadge}</span>
+            <span class="tabular" style="font-size:14px;font-weight:800;">HK$${app.amount} &rsaquo;</span>
+          </div>
+        </button>
+      `;
+    }).join('');
+
+    container.querySelectorAll('[data-resume-draft]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectTargetCompetition('D&AD New Blood');
+        navigateTo('screen-apply-2');
+      });
+    });
+  }
+
+  function setAppFilter(filterVal) {
+    state.appFilter = filterVal;
+    document.querySelectorAll('[data-app-filter]').forEach((pill) => {
+      pill.classList.toggle('active', pill.dataset.appFilter === filterVal);
+    });
+    renderApplications();
+  }
+
+  document.querySelectorAll('[data-app-filter]').forEach((pill) => {
+    pill.addEventListener('click', () => setAppFilter(pill.dataset.appFilter));
+  });
+
+  document.getElementById('app-search-input').addEventListener('input', (e) => {
+    state.appSearch = e.target.value;
+    renderApplications();
+  });
+
+  function openAppDrawer(appId) {
+    const app = state.applications.find((a) => a.id === appId) || state.applications[0];
+    const step = app.step || 3;
+    const fillPct = step === 4 ? '100%' : step === 3 ? '66%' : '33%';
+    openModal(`
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;">
+        <div>
+          <div class="mono" style="font-size:11px;color:var(--text-secondary);">${app.id}</div>
+          <h2 id="modal-title" style="margin:2px 0;font-size:19px;font-weight:800;">${app.title}</h2>
+          <div style="font-size:12px;color:var(--text-secondary);">${app.tierDesc}</div>
+        </div>
+        <button type="button" data-close-modal class="icon-btn" style="background:var(--surface-muted);width:36px;height:36px;" aria-label="Close dossier">&times;</button>
+      </div>
+
+      <div style="background:#F9FAFB;border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;">
+        <div>
+          <div class="section-kicker" style="font-size:10px;">SUBSIDIZED GRANT</div>
+          <div class="tabular" style="font-size:26px;font-weight:800;">HK$${app.amount}</div>
+        </div>
+        <span class="badge badge-crimson" style="background:#fff;border:1px solid var(--crimson-border);">100% Match</span>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span class="section-kicker" style="font-size:10px;">APPROVAL JOURNEY</span>
+        <span style="font-size:11px;font-weight:700;color:var(--crimson);">Live Tracker</span>
+      </div>
+      <div class="stepper" style="margin-bottom:16px;">
+        <div class="stepper-track" aria-hidden="true"><div class="stepper-track-fill" style="width:${fillPct};"></div></div>
+        <div class="step-node ${step >= 1 ? 'done' : ''}"><div class="step-circle">&#10003;</div><span class="step-label">Submitted</span></div>
+        <div class="step-node ${step >= 2 ? 'done' : ''}"><div class="step-circle">&#10003;</div><span class="step-label">Review</span></div>
+        <div class="step-node ${step >= 3 ? (step === 3 ? 'active' : 'done') : ''}"><div class="step-circle">&#10003;</div><span class="step-label">Approved</span></div>
+        <div class="step-node ${step >= 4 ? 'done' : ''}"><div class="step-circle">${step >= 4 ? '&#10003;' : '4'}</div><span class="step-label">Disbursed</span></div>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button type="button" id="modal-grant-pdf" class="btn btn-secondary" style="flex:1;">Grant PDF</button>
+        <button type="button" id="modal-view-dossier" class="btn btn-primary" style="flex:1;">View Dossier</button>
+      </div>
+    `);
+
+    document.getElementById('modal-grant-pdf').addEventListener('click', () => {
+      openDocPreview('Grant_Approval_' + app.ref + '.pdf');
+    });
+    document.getElementById('modal-view-dossier').addEventListener('click', () => {
+      closeModal();
+      navigateTo('screen-reimburse');
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6. NEW APPLICATION FLOW (STEP 1-5)
+     --------------------------------------------------------- */
+  document.getElementById('btn-save-draft-1').addEventListener('click', () => {
+    showToast('Draft saved for Chan Tai Man (21089452D)');
+  });
+
+  document.getElementById('btn-next-step3').addEventListener('click', () => {
+    const mobile = document.getElementById('inp-student-mobile');
+    if (!mobile.value.trim()) {
+      mobile.focus();
+      showToast('Please enter a mobile contact number');
+      return;
+    }
+    navigateTo('screen-apply-2');
+  });
+
+  function selectTargetCompetition(compName) {
+    state.selectedComp = compName;
+    document.querySelectorAll('[data-target-comp]').forEach((btn) => {
+      const match = btn.dataset.targetComp === compName;
+      btn.classList.toggle('selected', match);
+      if (match) {
+        document.getElementById('inp-reg-fee').value = btn.dataset.reg;
+        document.getElementById('inp-courier-fee').value = btn.dataset.courier;
+      }
+    });
+    updateGrantMath();
+  }
+
+  document.querySelectorAll('[data-target-comp]').forEach((btn) => {
+    btn.addEventListener('click', () => selectTargetCompetition(btn.dataset.targetComp));
+  });
+
+  document.querySelectorAll('[data-part]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state.selectedPart = btn.dataset.part;
+      document.querySelectorAll('[data-part]').forEach((b) => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  function updateGrantMath() {
+    const reg = Math.min(1000, Math.max(0, Number(document.getElementById('inp-reg-fee').value) || 0));
+    const courier = Math.min(1000, Math.max(0, Number(document.getElementById('inp-courier-fee').value) || 0));
+    const total = Math.min(1000, reg + courier);
+    const remaining = Math.max(0, 1000 - total);
+    document.getElementById('grant-total-display').textContent = 'HK$ ' + total;
+    document.getElementById('grant-quota-after').textContent = 'HK$ ' + remaining;
+    return { total, remaining };
+  }
+
+  document.getElementById('inp-reg-fee').addEventListener('input', updateGrantMath);
+  document.getElementById('inp-courier-fee').addEventListener('input', updateGrantMath);
+
+  document.getElementById('btn-review-submit').addEventListener('click', () => {
+    const title = document.getElementById('inp-project-title').value.trim();
+    const url = document.getElementById('inp-entry-url').value.trim();
+    const deadline = document.getElementById('inp-deadline').value;
+    if (!title || !url || !deadline) {
+      showToast('Please complete all competition details');
+      return;
+    }
+    const { total } = updateGrantMath();
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">Step 5: Review &amp; Submit</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="card" style="background:#F9FAFB;margin-bottom:14px;font-size:13px;">
+        <div style="margin-bottom:6px;"><strong>Competition:</strong> ${state.selectedComp}</div>
+        <div style="margin-bottom:6px;"><strong>Entry Title:</strong> ${title}</div>
+        <div style="margin-bottom:6px;"><strong>Structure:</strong> ${state.selectedPart}</div>
+        <div><strong>Reimbursable Subsidy:</strong> <span style="color:var(--crimson);font-weight:800;">HK$ ${total}</span></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button type="button" data-close-modal class="btn btn-secondary" style="flex:1;">Edit</button>
+        <button type="button" id="btn-final-submit-app" class="btn btn-primary" style="flex:1;">Submit Application</button>
+      </div>
+    `);
+
+    document.getElementById('btn-final-submit-app').addEventListener('click', () => {
+      const newRef = 'GDP-26-' + Math.floor(100 + Math.random() * 900);
+      state.applications.unshift({
+        id: 'APP-2026-' + Math.floor(100 + Math.random() * 900),
+        ref: newRef,
+        title: title,
+        category: state.selectedComp,
+        tierDesc: state.selectedComp + ' · ' + state.selectedPart,
+        dateMeta: 'Submitted: Just now',
+        amount: total,
+        status: 'pending',
+        step: 1
+      });
+      closeModal();
+      setAppFilter('all');
+      navigateTo('screen-applications');
+      showToast('Application ' + newRef + ' submitted for review');
+    });
+  });
+
+  /* ---------------------------------------------------------
+     7. REIMBURSEMENT PORTAL
+     --------------------------------------------------------- */
+  const freightInput = document.getElementById('inp-freight-file');
+  const freightDropzone = document.getElementById('freight-dropzone');
+  const freightRow = document.getElementById('freight-uploaded-row');
+
+  function attachFreightFile(fileName, sizeLabel) {
+    state.freightFile = { name: fileName, meta: sizeLabel };
+    document.getElementById('freight-file-name').textContent = fileName;
+    document.getElementById('freight-file-meta').textContent = sizeLabel;
+    freightRow.style.display = 'flex';
+    const reqBadge = document.getElementById('freight-required-badge');
+    reqBadge.className = 'badge badge-green';
+    reqBadge.textContent = '✓ ATTACHED';
+    const proofsBadge = document.getElementById('proofs-status-badge');
+    proofsBadge.className = 'badge badge-green';
+    proofsBadge.textContent = 'ALL PROOFS READY';
+    showToast('Uploaded ' + fileName);
+  }
+
+  freightInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) attachFreightFile(file.name, (file.size / 1048576).toFixed(2) + ' MB · Uploaded');
+  });
+
+  freightDropzone.addEventListener('dragover', (e) => { e.preventDefault(); freightDropzone.classList.add('dragover'); });
+  freightDropzone.addEventListener('dragleave', () => freightDropzone.classList.remove('dragover'));
+  freightDropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    freightDropzone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) attachFreightFile(file.name, (file.size / 1048576).toFixed(2) + ' MB · Uploaded');
+  });
+
+  document.getElementById('btn-remove-freight').addEventListener('click', () => {
+    state.freightFile = null;
+    freightInput.value = '';
+    freightRow.style.display = 'none';
+    const reqBadge = document.getElementById('freight-required-badge');
+    reqBadge.className = 'badge badge-crimson-solid';
+    reqBadge.textContent = 'REQUIRED';
+    const proofsBadge = document.getElementById('proofs-status-badge');
+    proofsBadge.className = 'badge badge-crimson';
+    proofsBadge.textContent = '! 1 ACTION NEEDED';
+    showToast('Removed freight proof');
+  });
+
+  document.getElementById('btn-confirm-payout').addEventListener('click', () => {
+    if (!state.freightFile) {
+      showToast('Please upload Customs & Freight Proof first');
+      freightDropzone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    document.getElementById('reimburse-flow-badge').textContent = 'STEP 3 OF 4';
+    document.getElementById('reimburse-flow-bar').style.width = '68%';
+    document.getElementById('flow-step-review').className = 'step-node done';
+    document.getElementById('flow-step-review').querySelector('.step-circle').innerHTML = '&#10003;';
+    document.getElementById('flow-step-payout').className = 'step-node active';
+    showToast('Confirmed! Payout queued for HSBC **8102 (3–5 Days)');
+  });
+
+  document.getElementById('btn-reimburse-pdf').addEventListener('click', () => {
+    openDocPreview('Reimbursement_Summary_GDP-RD25-884.pdf');
+  });
+
+  /* ---------------------------------------------------------
+     8. RESULTS & PROFILE SETTINGS
+     --------------------------------------------------------- */
+  document.querySelectorAll('[data-profile-tab]').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.profileTab;
+      document.querySelectorAll('[data-profile-tab]').forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.getElementById('subview-results').style.display = target === 'results' ? '' : 'none';
+      document.getElementById('subview-settings').style.display = target === 'settings' ? '' : 'none';
+    });
+  });
+
+  document.querySelectorAll('.award-option').forEach((opt) => {
+    opt.addEventListener('click', () => {
+      state.selectedAwardTier = opt.dataset.tier;
+      document.querySelectorAll('.award-option').forEach((o) => {
+        const isSel = o === opt;
+        o.classList.toggle('selected', isSel);
+        o.style.borderColor = isSel ? 'var(--green)' : 'var(--border)';
+        const chk = o.querySelector('.award-check');
+        chk.style.background = isSel ? 'var(--green)' : 'var(--surface-muted)';
+        chk.style.color = isSel ? '#FFFFFF' : 'transparent';
+      });
+      document.getElementById('award-tier-bonus').textContent = opt.dataset.bonus;
+      document.getElementById('honorarium-amount').textContent = opt.dataset.bonus;
+    });
+  });
+
+  document.getElementById('inp-cert-file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      document.getElementById('cert-file-name').textContent = file.name;
+      document.getElementById('cert-file-meta').textContent = (file.size / 1048576).toFixed(2) + ' MB · Uploaded';
+      document.getElementById('cert-uploaded-row').style.display = 'flex';
+      showToast('Certificate attached: ' + file.name);
+    }
+  });
+
+  document.getElementById('btn-remove-cert').addEventListener('click', () => {
+    document.getElementById('cert-uploaded-row').style.display = 'none';
+    document.getElementById('inp-cert-file').value = '';
+    showToast('Certificate removed');
+  });
+
+  document.getElementById('btn-submit-result').addEventListener('click', () => {
+    const comp = document.getElementById('result-comp-select').value;
+    showToast('Saved result for ' + comp + ' (' + state.selectedAwardTier + ')');
+  });
+
+  /* ---------------------------------------------------------
+     9. HELP & GUIDELINES ACCORDION + LIVE INQUIRY MODAL
+     --------------------------------------------------------- */
+  document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.accordion-item');
+      const isOpen = item.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  document.getElementById('btn-live-inquiry').addEventListener('click', () => {
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:18px;font-weight:800;">Live Inquiry — School of Design</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-live-inquiry">
+        <div class="field-group">
+          <label for="inq-topic" class="field-label" style="display:block;margin-bottom:6px;">Inquiry Topic</label>
+          <div class="input-shell editable">
+            <select id="inq-topic">
+              <option>Entry Fees &amp; Reimbursement</option>
+              <option>Logistics &amp; Customs Proof</option>
+              <option>Late Submission Prior Approval</option>
+              <option>Team Project Allocation</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="inq-message" class="field-label" style="display:block;margin-bottom:6px;">Message to gdp.design@polyu.edu.hk</label>
+          <div class="input-shell editable" style="padding:6px 12px;">
+            <textarea id="inq-message" rows="3" placeholder="Describe your competition or subsidy question..." required></textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button type="button" data-close-modal class="btn btn-secondary" style="flex:1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">Send Inquiry</button>
+        </div>
+      </form>
+    `);
+    document.getElementById('form-live-inquiry').addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal();
+      showToast('Inquiry sent to gdp.design@polyu.edu.hk (Mon–Fri 09–18)');
+    });
+  });
+
+  function openDocPreview(fileName) {
+    openModal(`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 id="modal-title" style="margin:0;font-size:17px;font-weight:800;">Document Preview</h2>
+        <button type="button" data-close-modal class="icon-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="card" style="background:#F9FAFB;margin-bottom:14px;">
+        <div class="mono" style="font-size:13px;font-weight:700;word-break:break-all;">${fileName}</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">PolyU School of Design (SD) • AY 2026/2027</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Student: Chan Tai Man (21089452D)</div>
+      </div>
+      <button type="button" data-close-modal class="btn btn-primary btn-block">Close Preview</button>
+    `);
+  }
+
+  /* Initial Render */
+  renderApplications();
+})();
+</script>
+</body>
+</html>

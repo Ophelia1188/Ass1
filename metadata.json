@@ -1,0 +1,6 @@
+{
+  "name": "PolyU Design Subsidy Portal",
+  "description": "PolyU School of Design Competition and Award Subsidy Portal for Academic Year 2026/2027.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
